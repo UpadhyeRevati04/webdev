@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Purchase Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0e6e6;
+            padding: 20px;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+            max-width: 400px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Book Purchase Form</h2>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required></textarea><br><br>
+        
+        <label>Subject of Book:</label><br>
+        <input type="radio" id="fiction" name="subject" value="Fiction" required>
+        <label for="fiction">Fiction</label><br>
+        <input type="radio" id="nonfiction" name="subject" value="Non-Fiction">
+        <label for="nonfiction">Non-Fiction</label><br>
+        <input type="radio" id="science" name="subject" value="Science">
+        <label for="science">Science</label><br>
+        <input type="radio" id="history" name="subject" value="History">
+        <label for="history">History</label><br><br>
+        
+        <label for="author">Favorite Author:</label>
+        <select id="author" name="author" required>
+            <option value="">Select an author</option>
+            <option value="J.K. Rowling">J.K. Rowling</option>
+            <option value="George R.R. Martin">George R.R. Martin</option>
+            <option value="Agatha Christie">Agatha Christie</option>
+            <option value="Stephen King">Stephen King</option>
+        </select><br><br>
+        
+        <label for="comments">Comments on the last book you read:</label>
+        <textarea id="comments" name="comments"></textarea><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
