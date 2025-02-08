@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort Array</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        pre {
+            text-align: left;
+            display: inline-block;
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Sort an Array in Ascending Order</h2>
+    <input type="text" id="arrayInput" placeholder="Enter numbers separated by commas">
+    <button onclick="sortAndDisplay()">Sort</button>
+    <p id="result"></p>
+    <pre id="iterations"></pre>
+
+    <script>
+        function bubbleSort(arr) {
+            let iterations = "";
+            let len = arr.length;
+            for (let i = 0; i < len - 1; i++) {
+                for (let j = 0; j < len - 1 - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                    }
+                }
+                iterations += `Iteration ${i + 1}: ${arr.join(", ")}\n`;
+            }
+            return { sortedArray: arr, steps: iterations };
+        }
+
+        function sortAndDisplay() {
+            let input = document.getElementById("arrayInput").value;
+            let numbers = input.split(',').map(num => num.trim()).filter(num => !isNaN(num) && num !== "").map(Number);
+            
+            if (numbers.length === 0) {
+                document.getElementById("result").innerText = "Please enter valid numbers.";
+                document.getElementById("iterations").innerText = "";
+                return;
+            }
+            
+            let { sortedArray, steps } = bubbleSort(numbers);
+            document.getElementById("result").innerText = "Sorted Array: " + sortedArray.join(", ");
+            document.getElementById("iterations").innerText = steps;
+        }
+    </script>
+</body>
+</html>
