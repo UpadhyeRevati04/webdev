@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background: linear-gradient(to right, #9ef9f4, #c9eef9, #a1c4fd);
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border: 4px solid black;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+            position: relative;
+        }
+        input {
+            padding: 10px;
+            width: 50px;
+            -moz-appearance: textfield;
+        }
+        button {
+            padding: 10px;
+            cursor: pointer;
+            background-color: rgb(255, 162, 224);
+            border: 2px solid black;
+        }
+        .blast {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="gameContainer">
+        <h1>Number Guessing Game</h1>
+        <p>Guess a number between 1 and 100</p>
+        <input type="number" id="userGuess" min="1" max="100">
+        <button onclick="checkGuess()">Guess</button>
+        <button onclick="restartGame()">Restart</button>
+        <p id="message"></p>
+        <p>Total Attempts: <span id="attempts">0</span></p>
+    </div>
+    <canvas class="blast" id="blasteffect"></canvas>
+
+    <script>
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+        let blasteffect = document.getElementById("blasteffect");
+        let ctx = blasteffect.getContext("2d");
+        
+        function resizeCanvas() {
+            blasteffect.width = window.innerWidth;
+            blasteffect.height = window.innerHeight;
+        }
+        
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+        
+        function startConfetti() {
+            blasteffect.style.display = "block";
+            let blastParticles = [];
+            for (let i = 0; i < 100; i++) {
+                blastParticles.push({
+                    x: Math.random() * blasteffect.width,
+                    y: Math.random() * blasteffect.height - blasteffect.height,
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                    size: Math.random() * 5 + 2,
+                    speed: Math.random() * 5 + 2
+                });
+            }
+            function drawblast() {
+                ctx.clearRect(0, 0, blasteffect.width, blasteffect.height);
+                blastParticles.forEach(p => {
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, p.size, p.size);
+                    p.y += p.speed;
+                    if (p.y > blasteffect.height) p.y = 0;
+                });
+                requestAnimationFrame(drawblast);
+            }
+            drawblast();
+            setTimeout(() => {
+                blasteffect.style.display = "none";
+            }, 100000);
+        }
+        
+        function checkGuess() {
+            let userGuess = document.getElementById("userGuess").value;
+            let message = document.getElementById("message");
+            let attemptsDisplay = document.getElementById("attempts");
+            
+            attempts++;
+            attemptsDisplay.textContent = attempts;
+            
+            if (userGuess == randomNumber) {
+                message.innerHTML = "🎉 Congratulations! You guessed the right number! 🎉";
+                message.style.color = "green";
+                startConfetti();
+            }else if(userGuess == randomNumber - 1 || userGuess == randomNumber+1){
+                message.textContent = "You are Close..";
+                message.style.color = "red";
+            } 
+            else if (userGuess < randomNumber) {
+                message.textContent = "Too low! Try again.";
+                message.style.color = "red";
+            } else {
+                message.textContent = "Too high! Try again.";
+                message.style.color = "red";
+            }
+        }
+        function restartGame(){
+            randomNumber = Math.floor(Math.random() * 100)+1;
+            attempts = 0;
+            document.getElementById("attempts").textContent = attempts;
+            document.getElementById("message").textContent = "";
+            document.getElementById("userGuess").value = "";
+        }
+    </script>
+</body>
+</html>
