@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+    background: linear-gradient(to right, #9ef9f4, #c9eef9, #a1c4fd);
+}
+.container {
+    background: white;
+    padding: 20px;
+    border: 4px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: auto;
+    position: relative;
+}
+input {
+    padding: 10px;
+    width: 50px;
+    -moz-appearance: textfield;
+}
+button {
+    padding: 10px;
+    cursor: pointer;
+    background-color: rgb(255, 162, 224);
+    border: 2px solid black;
+}
+.blast {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    display: none;
+}
