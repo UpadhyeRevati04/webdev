@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Quote Generator ✨</h1>
+        <p>Select a mood to get an inspirational quote:</p>
+        
+        <div class="buttons">
+            <button class="happy" onclick="generateQuote('happy')">😊 Happy</button>
+            <button class="sad" onclick="generateQuote('sad')">😢 Sad</button>
+            <button class="motivated" onclick="generateQuote('motivated')">🔥 Motivated</button>
+            <button class="love" onclick="generateQuote('love')">❤️ Love</button>
+            <button class="angry" onclick="generateQuote('angry')">😡 Angry</button>
+            <button class="calm" onclick="generateQuote('calm')">🧘 Calm</button>
+        </div>
+
+        <p id="quote">💭 Click a button to get a quote.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
